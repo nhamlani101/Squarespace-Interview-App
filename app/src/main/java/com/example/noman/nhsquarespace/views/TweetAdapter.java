@@ -1,6 +1,9 @@
 package com.example.noman.nhsquarespace.views;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,9 +39,20 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         holder.username.setText(t.getUsername());
         holder.tweetText.setText(t.getTweetText());
         Picasso.with(context).load(t.getProfileImageUrl()).into(holder.profileImage);
+        final String url= "https://twitter.com/" + t.getUsername()
+                + "/status/" + t.getId();
+        holder.tweetCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(browserIntent);
+            }
+        });
         setAnimation(holder.itemView, position);
-
     }
+
+
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,13 +81,14 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         protected TextView username;
         protected TextView tweetText;
         protected ImageView profileImage;
+        protected CardView tweetCard;
 
         public TweetViewHolder(View itemView) {
             super(itemView);
+            tweetCard = (CardView) itemView.findViewById(R.id.tweetCardView);
             username = (TextView) itemView.findViewById(R.id.tweetUser);
             tweetText = (TextView) itemView.findViewById(R.id.tweetText);
             profileImage = (ImageView) itemView.findViewById(R.id.tweetProfile);
-
         }
     }
 }

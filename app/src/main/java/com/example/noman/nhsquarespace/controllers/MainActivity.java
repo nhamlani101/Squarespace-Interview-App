@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,12 +32,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String theQuery = querySearch.getText().toString();
-                if (theQuery.contains("Squarespace") || theQuery.contains("squarespace")) {
+                if (theQuery.contains(getString(R.string.SS)) || theQuery.contains(getString(R.string.SSLower))) {
                     setUpView(theQuery);
                     querySearch.setVisibility(View.GONE);
                     submit.setVisibility(View.GONE);
+                    hideSoftKeyboard();
                 } else {
-                    Toast submitToast = Toast.makeText(getApplicationContext(), "The query is not about Squarespace, please try again", Toast.LENGTH_SHORT);
+                    Toast submitToast = Toast.makeText(getApplicationContext(), getString(R.string.error_toast), Toast.LENGTH_SHORT);
                     submitToast.show();
                 }
             }
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         if (!isConnected) {
-            Toast network = Toast.makeText(getApplicationContext(), "Please have a stable internet connection", Toast.LENGTH_SHORT);
+            Toast network = Toast.makeText(getApplicationContext(), getString(R.string.network_error), Toast.LENGTH_SHORT);
             network.show();
         }
     }
@@ -74,5 +76,12 @@ public class MainActivity extends Activity {
         header.setText("You are currently viewing tweets about " + query);
         TwitterSearch ts = new TwitterSearch(tweetList, getApplicationContext());
         ts.execute(query);
+    }
+
+    public void hideSoftKeyboard() {
+        if(getCurrentFocus()!= null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

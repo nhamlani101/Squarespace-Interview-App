@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/queryET"
-        android:hint="Search"
+        android:hint="@string/search"
         />
 
     <Button
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/submitQuery"
         android:layout_below="@+id/queryET"
-        android:text="Submit"/>
+        android:text="@string/submit"/>
 
     <TextView
         android:id="@+id/headerText"

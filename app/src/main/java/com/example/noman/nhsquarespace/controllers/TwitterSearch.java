@@ -62,14 +62,14 @@ public class TwitterSearch extends AsyncTask<String, Void, Integer> {
             Twitter twitter = new TwitterFactory(builder.build()).getInstance();
 
             Query query = new Query(params[0]);
-            query.setCount(25);
+            query.setCount(30);
             QueryResult result;
             result = twitter.search(query);
             List<twitter4j.Status> TJtweets = result.getTweets();
             if (TJtweets != null) {
                 this.tweets = new ArrayList<Tweet>();
                 for (twitter4j.Status tweet : TJtweets) {
-                    this.tweets.add(new Tweet("@" + tweet.getUser().getScreenName(), tweet.getText(), tweet.getUser().getBiggerProfileImageURL()));
+                    this.tweets.add(new Tweet("@" + tweet.getUser().getScreenName(), tweet.getText(), tweet.getUser().getBiggerProfileImageURL(), tweet.getId()));
                 }
             }
             return SUCCESS;

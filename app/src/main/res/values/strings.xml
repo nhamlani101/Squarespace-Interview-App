@@ -3,4 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="twitter_customer_key">55XLukU5hSHs8Ixt6egYM73pb</string>
     <string name="twitter_customer_secret">k4p61xCerm59cVKg8luWWTSLIA7oYYhQ8okZf9AeaRLdGuuBZJ</string>
+    <string name="error_toast">This query is not about Squarespace, please try again</string>
+    <string name="network_error">You are not connected to the internet, please try again later</string>
+    <string name="header_text">You are currently viewing tweets about </string>
+    <string name="search">Search Twitter</string>
+    <string name="submit">Submit</string>
+    <string name="SS">Squarespace</string>
+    <string name="SSLower">squarespace</string>
 </resources>
