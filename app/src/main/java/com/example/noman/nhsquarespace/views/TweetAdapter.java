@@ -24,6 +24,8 @@ import java.util.ArrayList;
  */
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHolder> {
 
+    //Adpater and its corresponding ViewHolder for the recyclerView
+
     private ArrayList<Tweet> tweets;
     private Context context;
     private int lastPosition = -1;
@@ -39,6 +41,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         holder.username.setText(t.getUsername());
         holder.tweetText.setText(t.getTweetText());
         Picasso.with(context).load(t.getProfileImageUrl()).into(holder.profileImage);
+
+        //The twitter tweet URL structure
         final String url= "https://twitter.com/" + t.getUsername()
                 + "/status/" + t.getId();
         holder.tweetCard.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +55,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         });
         setAnimation(holder.itemView, position);
     }
-
-
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

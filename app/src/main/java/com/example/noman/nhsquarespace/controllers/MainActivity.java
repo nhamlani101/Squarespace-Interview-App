@@ -28,10 +28,13 @@ public class MainActivity extends Activity {
         submit = (Button) findViewById(R.id.submitQuery);
         tweetList = (RecyclerView) findViewById(R.id.tweetList);
         checkNetwork();
+
+        //Click listener for submit, will call recyclerView and search when query is correct
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String theQuery = querySearch.getText().toString();
+                //:)
                 if (theQuery.contains(getString(R.string.SS)) || theQuery.contains(getString(R.string.SSLower))) {
                     setUpView(theQuery);
                     querySearch.setVisibility(View.GONE);
@@ -57,16 +60,8 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        tweetList.setVisibility(View.GONE);
-        querySearch.setVisibility(View.VISIBLE);
-        submit.setVisibility(View.VISIBLE);
-    }
-
     private void setUpView(String query) {
-
+        //Called when the query is correct, sets up recyclerView and calls search
         tweetList.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -79,6 +74,7 @@ public class MainActivity extends Activity {
     }
 
     public void hideSoftKeyboard() {
+        //Hide keyboard after submit is clicked
         if(getCurrentFocus()!= null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);

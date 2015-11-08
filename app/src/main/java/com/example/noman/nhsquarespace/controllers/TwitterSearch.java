@@ -23,6 +23,9 @@ import twitter4j.conf.ConfigurationBuilder;
  */
 public class TwitterSearch extends AsyncTask<String, Void, Integer> {
 
+    //An asyncTask is needed because fetching internet responses need to be
+    //done in background thread
+
     private ArrayList<Tweet> tweets;
     private RecyclerView tweetsRV;
     private String TWIT_CONS_KEY = "";
@@ -45,6 +48,8 @@ public class TwitterSearch extends AsyncTask<String, Void, Integer> {
     @Override
     protected Integer doInBackground(String... params) {
         try {
+
+            //ConfigurationBuilder are classes specified by the Twitter4Java library
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.setApplicationOnlyAuthEnabled(true);
             builder.setOAuthConsumerKey(TWIT_CONS_KEY);
@@ -66,6 +71,8 @@ public class TwitterSearch extends AsyncTask<String, Void, Integer> {
             QueryResult result;
             result = twitter.search(query);
             List<twitter4j.Status> TJtweets = result.getTweets();
+
+            //Creates my own POJO of tweets
             if (TJtweets != null) {
                 this.tweets = new ArrayList<Tweet>();
                 for (twitter4j.Status tweet : TJtweets) {
@@ -81,6 +88,8 @@ public class TwitterSearch extends AsyncTask<String, Void, Integer> {
 
     @Override
     protected void onPostExecute(Integer result) {
+
+        //After the process is done, call the adapter to show tweets
         if (result == SUCCESS) {
             TweetAdapter ta = new TweetAdapter(tweets, context);
             tweetsRV.setAdapter(ta);

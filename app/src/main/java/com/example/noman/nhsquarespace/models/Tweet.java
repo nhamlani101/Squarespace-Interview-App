@@ -5,6 +5,8 @@ package com.example.noman.nhsquarespace.models;
  */
 public class Tweet {
 
+    //Java object representing a tweet
+
     private String username;
     private String tweetText;
     private String profileImageUrl;
