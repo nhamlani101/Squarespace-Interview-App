@@ -8,5 +8,5 @@ Sample Android application for Squarespace interview
 
 **Libraries Used:**
 - Twitter4J: Easier parsing of Twitter Search API
-- Piccase (by Square): Efficent way to load images in Android
+- Picasso (by Square): Efficent way to load images in Android
 
