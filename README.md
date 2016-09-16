@@ -1,4 +1,4 @@
-# Squarespace-Interview-App
+# Twitter Search App
 Sample Android application for Squarespace interview
 
 **Features:**
